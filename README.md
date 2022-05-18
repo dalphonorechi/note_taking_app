@@ -4,7 +4,7 @@
 
 This is A simple note taking app.
 
-## ToDO
+## TODO
 <ul>
 <li>Add persistance storage</li>
 <li>Use MVVM architecture</li>
