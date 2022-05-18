@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:note_taking_app/data/data.dart';
+
+import 'AllNotes.dart';
+import 'new_note.dart';
 
 class Note extends StatefulWidget {
   final Map note;
@@ -17,8 +21,25 @@ class _NoteState extends State<Note> {
           title: Text(widget.note["title"]),
           backgroundColor: widget.note["color"],
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => NewNote(
+                                from: "edit",
+                                note: widget.note,
+                              ))));
+                },
+                icon: const Icon(Icons.edit)),
+            IconButton(
+                onPressed: () {
+                  Notes.removeWhere(
+                      (element) => element["id"] == widget.note["id"]);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (_) => const AllNotes()));
+                },
+                icon: const Icon(Icons.delete))
           ]),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
